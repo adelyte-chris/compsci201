@@ -9,7 +9,7 @@ public class SandwichBar {
 	public int whichOrder(String[] available, String[] orders) {
 		int order;
 
-		if("cat" == user) {
+		if ("cat" == user) {
 			order = whichOrderCat(available, orders);
 		}
 		else {
@@ -20,61 +20,40 @@ public class SandwichBar {
 	}
 
 	private int whichOrderCat(String[] available, String[] orders) {
-		int[] indcount = new int[orders.length];
-		int[] okay = new int[orders.length];
-		int position = -1;
-		
-		for (int ii = 0; ii < available.length; ii++){
-			for (int jj = 0; jj< available.length; jj++){
-				if (ii == jj){ 
-					available[ii] = available[ii];
-				}else if (available[ii].equals(available[jj])){
-					available[ii] = "-----0";
-				}else{
-					available[ii] = available[ii];
-				}
-			}
-		}
+		int found;
 		
 		for (int i = 0; i < orders.length; i++){
-			String[] ordercomp = orders[i].split(" ");
-			for (int j = 0; j < ordercomp.length; j++){
+			String[] order = orders[i].split(" ");
+			found = 0;
+
+			for (int j = 0; j < order.length; j++){
 				for (int k = 0; k < available.length; k++){
-					if (available[k].equals(ordercomp[j])){
-						indcount[i] = indcount[i] + 1;
-					}
-					else {
-						indcount[i] = indcount[i];
+					if (available[k].equals(order[j])){
+						found++;
+						break;
 					}
 				}
 			}
-			if (indcount[i] == ordercomp.length){
-				okay[i] = 1;
-			}else{
-				okay[i] = 0;
-			}
-			
-			if (okay[i] == 1){
-				position = i;
-				break;
-			}else{
-				position = -1;
+
+			if (order.length == found) {
+				return i;
 			}
 		}
-		return position;
+
+		return -1;
 	}
 
 	private int whichOrderChris(String[] available, String[] orders) {
 		Set<String> availableSet = new HashSet<String>();
 		Collections.addAll(availableSet, available);
 
-		for(int i = 0; i < orders.length; i++) {
+		for (int i = 0; i < orders.length; i++) {
 			String[] order = orders[i].split(" ");
 			
 			Set<String> orderSet = new HashSet<String>();
 			Collections.addAll(orderSet, order);
 
-			if(availableSet.containsAll(orderSet)) {
+			if (availableSet.containsAll(orderSet)) {
 				return i;
 			}
 		}
@@ -83,10 +62,12 @@ public class SandwichBar {
 	}
 
 	public static void main(String[] args) {
-		long start, elapsed;
+		long start, elapsed, cycles;
+
+		cycles = 100000;
 		start = System.nanoTime();
 
-		for(int i = 0; i < 100000; i++) {
+		for (int i = 0; i < cycles; i++) {
 			test("cat");
 		}
 
@@ -95,7 +76,7 @@ public class SandwichBar {
 
 		start = System.nanoTime();
 
-		for(int i = 0; i < 100000; i++) {
+		for (int i = 0; i < cycles; i++) {
 			test("chris");
 		}
 
@@ -117,7 +98,7 @@ public class SandwichBar {
 		);
 
 		expectation = 0;
-		if(result != expectation) {
+		if (result != expectation) {
 			failed++;
 			System.out.println("Example 1: expected result " + result + " to be " + expectation);
 		}
@@ -132,7 +113,7 @@ public class SandwichBar {
 		);
 
 		expectation = 1;
-		if(result == expectation) {
+		if (result == expectation) {
 			passed++;
 		}
 		else {
@@ -147,7 +128,7 @@ public class SandwichBar {
 		);
 
 		expectation = 4;
-		if(result == expectation) {
+		if (result == expectation) {
 			passed++;
 		}
 		else {
@@ -162,7 +143,7 @@ public class SandwichBar {
 		);
 
 		expectation = -1;
-		if(result == expectation) {
+		if (result == expectation) {
 			passed++;
 		}
 		else {
@@ -177,7 +158,7 @@ public class SandwichBar {
 		);
 
 		expectation = 20;
-		if(result == expectation) {
+		if (result == expectation) {
 			passed++;
 		}
 		else {
