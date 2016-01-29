@@ -19,6 +19,5 @@ which javac
 Compile and run the `HelloWorld.java` program.
 
 ```bash
-javac HelloWorld.java
-java HelloWorld # Prints "Hello, World!"
+javac HelloWorld.java && java HelloWorld # Prints "Hello, World!"
 ```
