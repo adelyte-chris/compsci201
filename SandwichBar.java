@@ -5,21 +5,8 @@ import java.util.Set;
 
 public class SandwichBar {
 	public int whichOrder(String[] available, String[] orders) {
-		Set<String> availableSet = new HashSet<String>();
-		Collections.addAll(availableSet, available);
-
-		for(int i = 0; i < orders.length; i++) {
-			String[] order = orders[i].split(" ");
-			
-			Set<String> orderSet = new HashSet<String>();
-			Collections.addAll(orderSet, order);
-
-			if(availableSet.containsAll(orderSet)) {
-				return i;
-			}
-		}
-
-		return -1;
+		// TODO: replace this stubbed return value with your code
+		return 0;
 	}
 
 	public static void main(String[] args) {
